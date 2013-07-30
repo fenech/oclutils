@@ -24,7 +24,7 @@
 #include <map>
 #include <climits>
 
-#include <CL/cl.h>
+#include <CL/cl.hpp>
 
 #ifndef std_cout
 #define std_cout std::cout
@@ -200,7 +200,7 @@ class OpenCL_device
         bool                            object_is_initialized;
         int                             device_id;
         cl_device_id                    device;
-        cl_context                      context;
+        cl::Context                     context;
         bool                            device_is_gpu;
         bool                            device_is_in_use;
 
@@ -294,7 +294,7 @@ class OpenCL_device
         cl_uint                         Get_Compute_Units() const   { return max_compute_units; }
         int                             Get_ID() const              { return device_id;         }
         cl_device_id &                  Get_Device()                { return device;            }
-        cl_context &                    Get_Context()               { return context;           }
+        cl::Context &                   Get_Context()               { return context;           }
         bool                            Is_In_Use()                 { return device_is_in_use;  }
         bool                            Is_Lockable()               { return is_lockable;       }
         void                            Set_Lockable(const bool _is_lockable) { is_lockable = _is_lockable; }
@@ -332,7 +332,7 @@ class OpenCL_devices_list
         void                            Set_Preferred_OpenCL(const int _preferred_device = -1);
         OpenCL_device &                 Preferred_OpenCL();
         cl_device_id &                  Preferred_OpenCL_Device()         { return Preferred_OpenCL().Get_Device(); }
-        cl_context &                    Preferred_OpenCL_Device_Context() { return Preferred_OpenCL().Get_Context(); }
+        cl::Context &                   Preferred_OpenCL_Device_Context() { return Preferred_OpenCL().Get_Context(); }
         int                             nb_devices()                     { return nb_cpu + nb_gpu; }
         void                            Print() const;
         void                            Initialize(const OpenCL_platform &_platform,
@@ -361,7 +361,7 @@ class OpenCL_platform
                                                    OpenCL_platforms_list *_platform_list, const std::string preferred_platform);
         OpenCL_device &                 Preferred_OpenCL()                   { return devices_list.Preferred_OpenCL(); }
         cl_device_id &                  Preferred_OpenCL_Device()            { return devices_list.Preferred_OpenCL_Device(); }
-        cl_context &                    Preferred_OpenCL_Device_Context()    { return devices_list.Preferred_OpenCL_Device_Context(); }
+        cl::Context &                   Preferred_OpenCL_Device_Context()    { return devices_list.Preferred_OpenCL_Device_Context(); }
         OpenCL_platforms_list *         Platform_List() const               { return platform_list; }
         void                            Print_Preferred() const;
         std::string                     Key() const                         { return key; }

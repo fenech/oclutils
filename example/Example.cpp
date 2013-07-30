@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
     // Create a command queue on "platform"'s preferred device.
     cl_int err;
-    cl_command_queue command_queue = clCreateCommandQueue(
+    cl::CommandQueue command_queue(  
         platforms_list[platform].Preferred_OpenCL_Device_Context(),  // OpenCL context
         platforms_list[platform].Preferred_OpenCL_Device(),          // OpenCL device id
         0, &err);

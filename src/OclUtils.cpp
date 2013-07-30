@@ -593,9 +593,6 @@ OpenCL_device::~OpenCL_device()
 // *****************************************************************************
 void OpenCL_device::Destructor()
 {
-    if (context)
-        clReleaseContext(context);
-
     Unlock();
 }
 
